@@ -9,3 +9,5 @@ PLAYER_SIZE = 16
 available_items = ['bow', 'key', 'potion', 'cape', 'magic hat', 'sword',
                        'treasure','pen']
 
+
+inventory = []

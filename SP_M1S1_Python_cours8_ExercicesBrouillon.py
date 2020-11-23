@@ -5,7 +5,7 @@ import random #ajout pour l'option téléportation (lignes 62-63)
 
 from constants import *
 from screen import create_screen, update_screen
-from world import create_world
+from world import create_world, transfer_item, run_game 
 
 
 def main():
@@ -44,7 +44,7 @@ def main():
                     # À la prochaine itération de notre boucle principale, la condition sera fausse et le programme va
                     # se terminer.
                     running = False
-#C'EST ICI QU'ON DÉPLACE LE JOUEUR! VIENS CODER ON EST BIEN
+            #C'EST ICI QU'ON DÉPLACE LE JOUEUR! VIENS CODER ON EST BIEN
                 elif event.key == pygame.K_LEFT:
                     if player[0] > 0:
                         player = (player[0] - 1, player[1])
@@ -57,10 +57,17 @@ def main():
                 elif event.key == pygame.K_DOWN:
                     if player[1] < WORLD_HEIGHT - 1:
                         player = (player[0], player[1] + 1)
-
-        #ESSAYER DE FAIRE UNE TOUCHE TÉLÉPORTER?
+             #ESSAYER DE FAIRE UNE TOUCHE TÉLÉPORTER?
                 elif event.key == pygame.K_t:
                     player = [random.randint(0, WORLD_WIDTH - 1), random.randint(0, WORLD_HEIGHT - 1)]
+                    
+            #NOW MAKE IT TAKE STUFF
+                elif event.key == pygame.K_p: #prendre
+                    transfer_item(ground, inventory, ground[0])
+                elif event.key == pygame.K_d: #déposer
+                    transfer_item(inventory, ground, inventory[0])
+
+
 #FIN DES EXPÉRIENCES ICI
             elif event.type == pygame.KEYUP:
                 # Une touche du clavier a été relachée.
