@@ -48,15 +48,24 @@ def main():
                 elif event.key == pygame.K_LEFT:
                     if player[0] > 0:
                         player = (player[0] - 1, player[1])
+                        index = get_index(player[0], player[1])
+                        print("sol : ", world[n], "inventaire : ", inventory)
                 elif event.key == pygame.K_RIGHT:
                     if player[0] < WORLD_WIDTH - 1:
-                        player = (player[0] + 1, player[1])                 
+                        player = (player[0] + 1, player[1])
+                        index = get_index(player[0], player[1])
+                        print("sol : ", world[n], "inventaire : ", inventory)
                 elif event.key == pygame.K_UP:
                     if player[1] > 0:
                         player = (player[0], player[1] - 1)
+                        index = get_index(player[0], player[1])
+                        print("sol : ", world[n], "inventaire : ", inventory)
+
                 elif event.key == pygame.K_DOWN:
                     if player[1] < WORLD_HEIGHT - 1:
                         player = (player[0], player[1] + 1)
+                        index = get_index(player[0], player[1])
+                        print("sol : ", world[n], "inventaire : ", inventory)
              #ESSAYER DE FAIRE UNE TOUCHE TÉLÉPORTER?
                 elif event.key == pygame.K_t:
                     player = [random.randint(0, WORLD_WIDTH - 1), random.randint(0, WORLD_HEIGHT - 1)]

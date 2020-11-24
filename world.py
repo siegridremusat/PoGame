@@ -6,14 +6,19 @@ def create_world():
     world = []
     # TODO Il faut remplir notre terrain ici, en fonction de la taille choisie préalablement.
     #bon ben go hein
-    world(range(WORLD_WIDTH * WORLD_HEIGHT - 1))
+#    world(range(WORLD_WIDTH * WORLD_HEIGHT - 1))
     
     n = int
     for n in range(0, WORLD_WIDTH * WORLD_HEIGHT - 1):
         world[n] = random.choices(available_items, k= random.randint(0, len(available_items)))
+        #chaque élément world[n] de la master liste world est une liste contenant un nombre
+        #aléatoire d'éléments (de zéro à tous) issus de la liste des objets possibles qui est
+        #dans les constantes
 
     return world
 
+def get_index(x, y):
+    return y * WORLD_WIDTH + x
 
 def transfer_item(source, target, item):
     if item in source:
