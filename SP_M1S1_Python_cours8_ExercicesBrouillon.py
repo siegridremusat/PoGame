@@ -60,7 +60,6 @@ def main():
                         player = (player[0], player[1] - 1)
                         index = get_index(player[0], player[1])
                         print("sol : ", world[n], "inventaire : ", inventory)
-
                 elif event.key == pygame.K_DOWN:
                     if player[1] < WORLD_HEIGHT - 1:
                         player = (player[0], player[1] + 1)
