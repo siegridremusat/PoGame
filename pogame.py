@@ -60,41 +60,50 @@ def main():
                     if position[0] > 0:
                         position = (position[0] - 1, position[1])
                         room = get_room(world, position[0], position[1])
-                        if len(room) > 0 and "sword" in room:
+                        if len(room) > 0 and "sword" in room or "shield" in room:
                             item = room[0]
                             room, inventory2 = transfer_item(room, inventory2, item)
                         elif len(room) > 0 and "monster" in room:
                             if "sword" in inventory2:
                                 item = room[0]
                                 room, inventory = transfer_item(room, inventory, item)
+                            elif "shield" in inventory2:
+                                pass                                
                             else:
                                 running = False
 
                 elif event.key == pygame.K_RIGHT:
-                    if position[0] < WORLD_WIDTH - 1:
+                    if position[0] < WORLD_WIDTH - 1: 
                         position = (position[0] + 1, position[1])
                         room = get_room(world, position[0], position[1])
-                        if len(room) > 0 and "sword" in room:
+                        if len(room) > 0 and "sword" in room or "shield" in room:
                             item = room[0]
                             room, inventory2 = transfer_item(room, inventory2, item)
                         elif len(room) > 0 and "monster" in room:
                             if "sword" in inventory2:
                                 item = room[0]
                                 room, inventory = transfer_item(room, inventory, item)
+                            elif "shield" in inventory2:
+                                pass
                             else:
                                 running = False
+                    #ajout d'une sortie
+                    elif position[0] == WORLD_WIDTH - 1 and position[1] == WORLD_HEIGHT/3:
+                        running = False
 
                 elif event.key == pygame.K_UP:
                     if position[1] > 0:
                         position = (position[0], position[1] - 1)
                         room = get_room(world, position[0], position[1])
-                        if len(room) > 0 and "sword" in room:
+                        if len(room) > 0 and "sword" in room or "shield" in room:
                             item = room[0]
                             room, inventory2 = transfer_item(room, inventory2, item)
                         elif len(room) > 0 and "monster" in room:
                             if "sword" in inventory2:
                                 item = room[0]
                                 room, inventory = transfer_item(room, inventory, item)
+                            elif "shield" in inventory2:
+                                pass
                             else:
                                 running = False
                             
@@ -102,13 +111,15 @@ def main():
                     if position[1] < WORLD_HEIGHT - 1:
                         position = (position[0], position[1] + 1)
                         room = get_room(world, position[0], position[1])
-                        if len(room) > 0 and "sword" in room:
+                        if len(room) > 0 and "sword" in room or "shield" in room:
                             item = room[0]
                             room, inventory2 = transfer_item(room, inventory2, item)
                         elif len(room) > 0 and "monster" in room:
                             if "sword" in inventory2:
                                 item = room[0]
                                 room, inventory = transfer_item(room, inventory, item)
+                            elif "shield" in inventory2:
+                                pass
                             else:
                                 running = False
 
@@ -116,13 +127,15 @@ def main():
                 elif event.key == pygame.K_t:
                     position = [random.randint(0, WORLD_WIDTH - 1), random.randint(0, WORLD_HEIGHT - 1)]
                     room = get_room(world, position[0], position[1])
-                    if len(room) > 0 and "sword" in room:
+                    if len(room) > 0 and "sword" in room or "shield" in room:
                         item = room[0]
                         room, inventory2 = transfer_item(room, inventory2, item)
                     elif len(room) > 0 and "monster" in room:
                         if "sword" in inventory2:
                             item = room[0]
                             room, inventory = transfer_item(room, inventory, item)
+                        elif "shield" in inventory2:
+                            pass
                         else:
                             break
                 elif event.key == pygame.K_SPACE:

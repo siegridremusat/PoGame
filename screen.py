@@ -9,7 +9,8 @@ def create_screen(world):
     pygame.init()
     board_width = WORLD_WIDTH * ROOM_SIZE
     board_height = WORLD_HEIGHT * ROOM_SIZE
-    screen = pygame.display.set_mode((board_width, board_height + ITEM_SIZE * 3))
+    #élargir l'écran à droite pour indiquer la sortie
+    screen = pygame.display.set_mode((board_width + ITEM_SIZE, board_height + ITEM_SIZE * 3))
     pygame.display.set_caption("SciencesPo Game")
 
     # Fill background
@@ -83,6 +84,19 @@ def update_screen(screen, background, world, player, inventory, inventory2):
                     ITEM_SIZE,
                 )
  
+    #bouclier
+    for y in range(WORLD_HEIGHT):
+        for x in range(WORLD_WIDTH):
+            if "shield" in get_room(world, x, y):
+                pygame.draw.circle( #si tu as le temps, fais un triangle ou importe un bouclier
+                    screen,
+                    (124, 164, 224), #couleur du bouclier  dans le jeu
+                    (
+                        x * ROOM_SIZE + ROOM_SIZE - ITEM_SIZE * 2,
+                        y * ROOM_SIZE + ROOM_SIZE - ITEM_SIZE * 2,
+                    ),
+                    ITEM_SIZE,
+                )
 
 
     #inventaire (kill streak)
@@ -109,8 +123,22 @@ def update_screen(screen, background, world, player, inventory, inventory2):
             ITEM_SIZE,
         )
         
-        x -= ITEM_SIZE * 3    
-
+        x -= ITEM_SIZE * 3
+        
+    #porte de sortie:
+    x = WORLD_WIDTH * ROOM_SIZE #position (abscisse) de la porte
+    y = (WORLD_HEIGHT * ROOM_SIZE)/3
+    pygame.draw.rect(
+        screen,
+        (55, 55, 55), #couleur de la porte
+        [
+            WORLD_WIDTH * ROOM_SIZE,
+            WORLD_HEIGHT/3 * ROOM_SIZE,
+            ROOM_SIZE,
+            ROOM_SIZE,
+        ],
+        )
+        
         
     # TODO en théorie, il faudrait utiliser les éléments du monde pour afficher d'autres choses sur notre écran ...
 

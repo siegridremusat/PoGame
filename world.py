@@ -14,10 +14,14 @@ def create_world():
             #        world.append(["sword"])
             if random.randint(0, 9) == 0 and (x, y) != (0, 0):
                 world.append(["monster"])
-            if random.randint(0, 50) == 0 and (x, y) != (0, 0):
-                world.append(["sword"]) #solution pas idéale mais allons y petit à petit
+            if (x, y) == (random.randint(WORLD_WIDTH/2, WORLD_WIDTH - 1), random.randint(WORLD_HEIGHT/2, WORLD_HEIGHT - 1)):
+                world.append(["sword"])
+#            if random.randint(0, 70) == 0 and (x, y) != (0, 0):
+#                world.append(["sword"]) #solution pas idéale mais allons y petit à petit
                 #ca ajoute une ou plusieurs épées au hasard sur la map
                 #comment ajouter une seule épée? comment contrôler la zone ou elle apparaît?     
+            if (x, y) == (random.randint(1, WORLD_WIDTH/2), random.randint(1, WORLD_HEIGHT/2)):
+                world.append(["shield"])
             else:
                 world.append([])
     
