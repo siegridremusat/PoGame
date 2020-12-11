@@ -24,6 +24,7 @@ def main():
     position = [0, 0]
     inventory = []
     inventory2 = []
+    
 
     # Les variables qui nous permettent de savoir si notre programme est en cours d'exécution ou s'il doit se terminer.
     alive = True
@@ -71,6 +72,7 @@ def main():
                                 pass                                
                             else:
                                 running = False
+                       
 
                 elif event.key == pygame.K_RIGHT:
                     if position[0] < WORLD_WIDTH - 1: 
@@ -122,6 +124,9 @@ def main():
                                 pass
                             else:
                                 running = False
+                
+                
+                            
 
 #ESSAYER DE FAIRE UNE TOUCHE TÉLÉPORTER?
                 elif event.key == pygame.K_t:
@@ -146,7 +151,26 @@ def main():
             elif event.type == pygame.KEYUP:
                 # Une touche du clavier a été relachée.
                 pass
-
+            
+            #tentative de faire bouger les monstres
+#            for y in range(WORLD_HEIGHT - 1):
+#                for x in range(WORLD_WIDTH - 1):
+#                    room = [x, y]
+#                    room2 = [random.randint(x - 1, x + 1), random.randint(y - 1, y + 1)]
+ #                   if "monster" in room:
+ #                       transfer_item(room, room2, "monster")
+                        #position[x] = random.randint(x - 1, x + 1)
+                        #position[y] = random.randint(y - 1, y + 1)
+                        
+            for y in range(WORLD_HEIGHT - 1):
+                for x in range(WORLD_WIDTH - 1):
+                    room = [x, y]
+                    room2 = [random.randint(x - 1, x + 1), random.randint(y - 1, y + 1)]
+                    item = "monster"
+                    if "monster" in get_room(world, x, y):
+                        transfer_item(room, room2, item)
+                                      
+                        
         # On met à jour ce qu'on affiche sur l'écran, et on "pousse" l'aiguille de l'horloge d'un pas.
         update_screen(screen, background, world, position, inventory, inventory2)
         clock.tick()
