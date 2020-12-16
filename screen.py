@@ -40,9 +40,26 @@ def create_screen(world):
     return screen, background
 
 
-def update_screen(screen, background, world, player, inventory, inventory2):
-    player_x, player_y = player
+def update_screen(screen, background, world, player, inventory, inventory2, monster):
+
+
+    monster_x, monster_y = monster
     screen.blit(background, (0, 0))
+    # couleur (red, green, blue)
+    #range 0-255 avec noir:(0, 0, 0) et blanc:(255, 255, 255)
+    pygame.draw.rect(
+        screen,
+        (50, 50, 50), #couleur du monstre
+        [
+            monster_x * ROOM_SIZE + (ROOM_SIZE - PLAYER_SIZE) / 2,
+            monster_y * ROOM_SIZE + (ROOM_SIZE - PLAYER_SIZE) / 2,
+            PLAYER_SIZE,
+            PLAYER_SIZE,
+        ],
+    )
+    
+    player_x, player_y = player
+    
 
     # couleur (red, green, blue)
     #range 0-255 avec noir:(0, 0, 0) et blanc:(255, 255, 255)
@@ -56,6 +73,8 @@ def update_screen(screen, background, world, player, inventory, inventory2):
             PLAYER_SIZE,
         ],
     )
+    
+
     
     for y in range(WORLD_HEIGHT):
         for x in range(WORLD_WIDTH):
@@ -130,7 +149,7 @@ def update_screen(screen, background, world, player, inventory, inventory2):
     y = (WORLD_HEIGHT * ROOM_SIZE)/3
     pygame.draw.rect(
         screen,
-        (55, 55, 55), #couleur de la porte
+        (200, 200, 200), #couleur de la porte
         [
             WORLD_WIDTH * ROOM_SIZE,
             WORLD_HEIGHT/3 * ROOM_SIZE,

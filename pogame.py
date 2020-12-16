@@ -12,6 +12,21 @@ def transfer_item(source, target, item):
         target.append(item)
     return source, target
 
+def move_monster_y(monster):
+    monster_x, monster_y = monster
+    r = random.randint(-1, 1)
+    while monster_y + r < 0 or monster_y + r >= WORLD_HEIGHT:
+        r = random.randint(-1, 1)
+    return [monster_x, monster_y]
+
+def move_monster_x(monster):
+    monster_x, monster_y = monster
+    r = random.randint(-1, 1)
+    while monster_x + r < 0 or monster_x + r >= WORLD_WIDTH:
+        r = random.randint(-1, 1)
+    return [monster_x, monster_y]
+
+
 
 def main():
     # Création du "monde" tel que nous le définissons
@@ -24,6 +39,7 @@ def main():
     position = [0, 0]
     inventory = []
     inventory2 = []
+    monster = [5, 5]
     
 
     # Les variables qui nous permettent de savoir si notre programme est en cours d'exécution ou s'il doit se terminer.
@@ -31,7 +47,7 @@ def main():
     running = True
 
     # On met à jour ce qu'on affiche sur l'écran, et on "pousse" l'aiguille de l'horloge d'un pas.
-    update_screen(screen, background, world, position, inventory, inventory2)
+    update_screen(screen, background, world, position, inventory, inventory2, monster)
     clock.tick()
 
     # Boucle "quasi" infinie, qui s'arrêtera si le joueur est mort, ou si l'arrêt du programme est demandé.
@@ -59,11 +75,22 @@ def main():
 #rajouter la condition potion?
                 elif event.key == pygame.K_LEFT:
                     if position[0] > 0:
-                        position = (position[0] - 1, position[1])
+                        position = (position[0] - 1, position[1]) #déplacement du joueur
+                        monster = move_monster_x(monster) #déplacement du monstre
+                        
                         room = get_room(world, position[0], position[1])
                         if len(room) > 0 and "sword" in room or "shield" in room:
                             item = room[0]
                             room, inventory2 = transfer_item(room, inventory2, item)
+                        
+                        if monster == position:
+                            if "sword" in inventory2:
+                                inventory.append("monster")
+                            elif "shield" in inventory2:
+                                pass
+                            else:
+                                running = False
+                            
                         elif len(room) > 0 and "monster" in room:
                             if "sword" in inventory2:
                                 item = room[0]
@@ -77,6 +104,7 @@ def main():
                 elif event.key == pygame.K_RIGHT:
                     if position[0] < WORLD_WIDTH - 1: 
                         position = (position[0] + 1, position[1])
+                        monster = move_monster_x(monster)
                         room = get_room(world, position[0], position[1])
                         if len(room) > 0 and "sword" in room or "shield" in room:
                             item = room[0]
@@ -96,6 +124,7 @@ def main():
                 elif event.key == pygame.K_UP:
                     if position[1] > 0:
                         position = (position[0], position[1] - 1)
+                        monster = move_monster_y(monster)
                         room = get_room(world, position[0], position[1])
                         if len(room) > 0 and "sword" in room or "shield" in room:
                             item = room[0]
@@ -112,6 +141,7 @@ def main():
                 elif event.key == pygame.K_DOWN:
                     if position[1] < WORLD_HEIGHT - 1:
                         position = (position[0], position[1] + 1)
+                        monster = move_monster_y(monster)
                         room = get_room(world, position[0], position[1])
                         if len(room) > 0 and "sword" in room or "shield" in room:
                             item = room[0]
@@ -172,7 +202,7 @@ def main():
                                       
                         
         # On met à jour ce qu'on affiche sur l'écran, et on "pousse" l'aiguille de l'horloge d'un pas.
-        update_screen(screen, background, world, position, inventory, inventory2)
+        update_screen(screen, background, world, position, inventory, inventory2, monster)
         clock.tick()
         
         if len(inventory) >= 10:

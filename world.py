@@ -13,8 +13,8 @@ def create_world():
                 world.append(["monster"])
     
 
-   #         if (x, y) == (random.randint(WORLD_WIDTH/2, WORLD_WIDTH - 1), random.randint(WORLD_HEIGHT/2, WORLD_HEIGHT - 1)):
-   #             world.append(["sword"])    
+            if (x, y) == (random.randint(WORLD_WIDTH/2, WORLD_WIDTH - 1), random.randint(WORLD_HEIGHT/2, WORLD_HEIGHT - 1)):
+                world.append(["sword"])    
 
 
             if (x, y) == (random.randint(1, WORLD_WIDTH/2), random.randint(1, WORLD_HEIGHT/2)):
@@ -23,9 +23,15 @@ def create_world():
                 
             else:
                 world.append([])
-                
-    list((x, y)) == (random.randint(WORLD_WIDTH/2, WORLD_WIDTH - 1), random.randint(WORLD_HEIGHT/2, WORLD_HEIGHT - 1))
-    world.append("sword")
+    
+    
+#    sword_x, sword_y = 0, 0
+    r_x = random.randint(0, WORLD_WIDTH - 1)
+    r_y = random.randint(0, WORLD_HEIGHT - 1)
+    world[r_y * WORLD_WIDTH + r_x] = ["sword"]
+    
+#    list((x, y)) == (random.randint(WORLD_WIDTH/2, WORLD_WIDTH - 1), random.randint(WORLD_HEIGHT/2, WORLD_HEIGHT - 1))
+#    world.append("sword")
             
             
     return world
